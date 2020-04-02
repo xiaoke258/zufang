@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class=" col col-md-8 col-md-offset-2 ">
+            <form action="{% url 'part1:add_book' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">书籍名称</label>
+                    <input type="text" class="form-control" id="title" placeholder="书名" name="book_title">
+                </div>
+                <div class="form-group">
+                    <label for="price">价格</label>
+                    <input type="number" class="form-control" id="price" placeholder="价格" name="book_price">
+                </div>
+                <div class="form-group">
+                    <label for="date">出版日期</label>
+                    <input type="date" class="form-control" id="date" placeholder="日期" name="book_pub_date">
+                </div>
+                {#                <div class="form-group">#}
+                {#                    <label for="publish">出版社</label>#}
+                {#                    <input type="text" class="form-control" id="publish" placeholder="出版社" name="book_publish">#}
+                {#                </div>#}
+            <label for="publish">出版社</label>
+                <select class="form-control" id='publish' name="book_publish">
+                    {% for publish in publishs %}
+                    <option>{{ publish.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <button class="btn btn-success pull-right">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
